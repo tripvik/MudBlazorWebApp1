@@ -14,11 +14,11 @@ COPY ["MudBlazorWebApp1/MudBlazorWebApp1.Client/MudBlazorWebApp1.Client.csproj",
 RUN dotnet restore "./MudBlazorWebApp1/MudBlazorWebApp1/MudBlazorWebApp1.csproj"
 COPY . .
 WORKDIR "/src/MudBlazorWebApp1/MudBlazorWebApp1"
-RUN dotnet build "./MudBlazorWebApp1.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./MudBlazorWebApp1/MudBlazorWebApp1/MudBlazorWebApp1.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./MudBlazorWebApp1.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./MudBlazorWebApp1/MudBlazorWebApp1/MudBlazorWebApp1.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
